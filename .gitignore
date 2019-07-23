@@ -7,7 +7,7 @@
 output
 config.wyam.dll
 config.wyam.hash
-packages.xml
+config.wyam.packages.xml
 
 # User-specific files
 *.suo

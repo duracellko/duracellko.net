@@ -1,0 +1,30 @@
+Title: Projects
+---
+@{
+    var index = 0;
+    var projectDocuments = Documents["Projects"].OrderBy(d => d.Metadata.Get<int>("OrderNumber", int.MaxValue));
+}
+@foreach (var document in projectDocuments)
+{
+    @if (index != 0)
+    {
+        <hr />
+    }
+
+    index++;
+    var title = document.Metadata.Get<string>("Title");
+    var image = document.Metadata.Get<string>("Image");
+
+    <div class="row">
+    <div class="col-md-3">
+        @if (!string.IsNullOrEmpty(image))
+        {
+            <img src="@image" alt="@title" />
+        }
+    </div>
+    <div class="col-md-9">
+        <h2>@title</h2>
+        @Html.Raw(document)
+    </div>
+    </div>
+}

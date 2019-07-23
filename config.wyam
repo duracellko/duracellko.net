@@ -1,0 +1,15 @@
+#recipe Blog
+#theme CleanBlog
+
+// Customization settings
+Settings[Keys.Host] = "duracellko.net";
+Settings[BlogKeys.Title] = "Duracellko.NET";
+Settings[BlogKeys.Description] = "Welcome to Duracellko.NET";
+Settings[BlogKeys.GenerateArchive] = false;
+Settings[BlogKeys.IgnoreFolders] = "projects";
+
+// Pipeline customizations
+Pipelines.Insert(0, "Projects",
+    ReadFiles("projects/**/*.md"),
+    FrontMatter(Yaml()),
+    Markdown());
