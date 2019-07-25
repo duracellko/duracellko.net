@@ -5,6 +5,7 @@
 Settings[Keys.Host] = "duracellko.net";
 Settings[BlogKeys.Title] = "Duracellko.NET";
 Settings[BlogKeys.Description] = "Welcome to Duracellko.NET";
+Settings[BlogKeys.Image] = "/images/background.jpg";
 Settings[BlogKeys.GenerateArchive] = false;
 Settings[BlogKeys.IgnoreFolders] = "projects";
 

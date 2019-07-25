@@ -3,7 +3,7 @@ OrderNumber: 1
 ---
 # Welcome to Duracellko.NET
 
-<img src="images/duracellkoHK.jpg" alt="Duracellko" style="float: right;" />
+<img src="images/duracellkoHK.jpg" alt="Duracellko" class="pull-right" style="margin-left: 10px; margin-bottom: 10px;" />
 
 Hi, I am Rasťo. Welcome to my homepage, where I would like to share my projects, experiences and other interesting things.
 
