@@ -1,0 +1,41 @@
+# Builds and deploys static website duracellko.net
+
+trigger:
+- master
+
+pr: none
+
+jobs:
+- job: DuracellkoWebSite
+  displayName: Duracellko.WebSite
+
+  pool:
+    vmImage: windows-2019
+  
+  workspace:
+    clean: all
+  
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Install Wyam
+    inputs:
+      command: custom
+      custom: tool
+      arguments: install -g Wyam.Tool
+  
+  - script: wyam
+
+  - task: ArchiveFiles@2
+    displayName: ZIP output
+    inputs:
+      archiveType: zip
+      rootFolderOrFile: $(Build.SourcesDirectory)/output
+      archiveFile: $(Build.StagingDirectory)/web.zip
+      includeRootFolder: false
+      replaceExistingArchive: true
+  
+  - task: PublishBuildArtifacts@1
+    displayName: Publish artifact
+    inputs:
+      PathtoPublish: $(Build.StagingDirectory)
+      ArtifactName: web
