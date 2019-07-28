@@ -81,8 +81,13 @@ var Duracellko;
                     _this._alertPanels.showSuccess();
                     _this.clearForm();
                 })
-                .fail(function () {
-                    _this._alertPanels.showError();
+                .fail(function (jqXHR) {
+                    if (jqXHR.status === 400) {
+                        _this._alertPanels.showValidationError();
+                    }
+                    else {
+                        _this._alertPanels.showError();
+                    }
                 })
                 .always(function () {
                     _this._sendButton.button('reset');
