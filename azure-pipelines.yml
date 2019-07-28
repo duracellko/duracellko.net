@@ -40,11 +40,13 @@ jobs:
       PathtoPublish: $(Build.StagingDirectory)
       ArtifactName: web
 
-  - task: FtpUpload@1
+  - task: FtpUpload@2
     displayName: Upload to duracellko.net-FTP
     inputs:
       serverEndpoint: 'duracellko.net-FTP'
       rootDirectory: $(Build.SourcesDirectory)/output
       remoteDirectory: /
-      clean: true
+      preservePaths: true
+      clean: false
+      cleanContents: true
       trustSSL: true
