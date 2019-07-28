@@ -4,3 +4,17 @@ a img:hover,
 a img:focus {
     cursor: inherit;
 }
+
+div.personal-photo {
+    padding-top: 30px;
+}
+
+@media (min-width: 720px) {
+
+    div.personal-photo {
+        float: right;
+        padding-left: 30px;
+        padding-bottom: 30px;
+    }
+
+}
