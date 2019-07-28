@@ -1,0 +1,6 @@
+/* Override default theme styles */
+
+a img:hover,
+a img:focus {
+    cursor: inherit;
+}
