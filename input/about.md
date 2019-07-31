@@ -24,6 +24,6 @@ My certificates:
 * MCTS .NET Framework 2, Web Applications
 * MCAD Microsoft.NET
 
-In last years I got impressed by photography and I try improving slowly in this hobby. Additionally I like mountain biking, inline-skating, billiard.
+In last years I got impressed by photography and I try improving slowly in this hobby. Also I like mountain biking, inline-skating, and billiard.
 
 [![.NET Foundation](images/dotnetfoundation.png)](https://dotnetfoundation.org/)
