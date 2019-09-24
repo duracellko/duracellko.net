@@ -8,6 +8,7 @@ Settings[BlogKeys.Description] = "Welcome to Duracellko.NET";
 Settings[BlogKeys.Image] = "/images/background.jpg";
 Settings[BlogKeys.IncludeDateInPostPath] = true;
 Settings[BlogKeys.GenerateArchive] = false;
+Settings[BlogKeys.IndexPageSize] = 10;
 Settings[BlogKeys.IgnoreFolders] = "projects";
 
 // Pipeline customizations
