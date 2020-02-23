@@ -58,6 +58,8 @@ OrderNumber: 10
 
 <script type="text/javascript" src="/assets/js/Duracellko.ContactForm.js"></script>
 <script>
-    var duracellkoContactForm = new Duracellko.ContactForm("contactForm");
-    duracellkoContactForm.init();
+    window.addEventListener("load", function () {
+        var duracellkoContactForm = new Duracellko.ContactForm("contactForm");
+        duracellkoContactForm.init();
+    });
 </script>
