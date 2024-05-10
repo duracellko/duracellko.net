@@ -1,0 +1,8 @@
+Host: duracellko.net
+SiteTitle: Duracellko.NET
+SiteDescription: Welcome to Duracellko.NET
+Image: /images/background.jpg
+Copyright: "Copyright Duracellko.NET © 2013"
+
+ProjectSources: projects/**/*
+IsProject: => Context.Outputs.FilterSources(Context.GetString("ProjectSources")).ContainsById(Document)
