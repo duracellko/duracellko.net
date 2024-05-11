@@ -1,6 +1,4 @@
-﻿using System.Management;
-using System.Text;
-using AngleSharp.Io;
+﻿using System.Text;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Logging;
@@ -28,6 +26,9 @@ public class DeployAzureStorage : MultiConfigModule
 
     protected override async Task<IEnumerable<IDocument>> ExecuteConfigAsync(IDocument input, IExecutionContext context, IMetadata values)
     {
+        ArgumentNullException.ThrowIfNull(context, nameof(context));
+        ArgumentNullException.ThrowIfNull(values, nameof(values));
+
         var connectionString = values.GetString(ConnectionString);
         var containerName = values.GetString(ContainerName, DefaultContainerName);
         var sourcePath = values.GetPath(SourcePath, context.FileSystem.OutputPath);
@@ -36,7 +37,7 @@ public class DeployAzureStorage : MultiConfigModule
         {
             var blobServiceClient = new BlobServiceClient(connectionString);
             context.LogDebug(
-                "Deploying '{source}' to Azure Storage '{uri}' container '{container}'.",
+                "Deploying '{Source}' to Azure Storage '{Uri}' container '{Container}'.",
                 sourcePath,
                 blobServiceClient.Uri,
                 containerName);
@@ -46,7 +47,7 @@ public class DeployAzureStorage : MultiConfigModule
         }
         catch (Exception ex)
         {
-            context.LogError("Exception while deploying Azure Storage: {error}", ex.Message);
+            context.LogError("Exception while deploying Azure Storage: {Error}", ex.Message);
             throw;
         }
 
@@ -61,7 +62,7 @@ public class DeployAzureStorage : MultiConfigModule
         foreach (var file in files)
         {
             var relativeFilePath = Path.GetRelativePath(sourcePath.FullPath, file);
-            context.LogDebug("Uploading file to Azure Blob: {path}", relativeFilePath);
+            context.LogDebug("Uploading file to Azure Blob: {Path}", relativeFilePath);
 
             var blobName = GetBlobName(relativeFilePath);
             var mimeType = MimeTypeProvider.GetMimeTypeFromFileName(relativeFilePath);

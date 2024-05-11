@@ -27,10 +27,7 @@ internal static class MimeTypeProvider
 
     public static string GetMimeTypeFromFileName(string path)
     {
-        if (string.IsNullOrEmpty(path))
-        {
-            throw new ArgumentNullException(nameof(path));
-        }
+        ArgumentNullException.ThrowIfNullOrEmpty(path, nameof(path));
 
         var extension = Path.GetExtension(path);
         if (ExtensionMimeTypes.TryGetValue(extension, out var mimeType))
