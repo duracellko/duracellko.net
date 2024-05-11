@@ -1,0 +1,48 @@
+Title: Projects
+ArchiveSources: => GetString("ProjectSources")
+ArchiveFilter: => GetBool("IsProject")
+ArchiveOrderKey: Order
+ArchiveTitle: => GetString("Title")
+ShowInNavbar: true
+Order: 2
+---
+@using Statiq.Common
+@using Statiq.Razor
+@using Statiq.Web
+@using Statiq.Web.Pipelines
+@using Microsoft.Extensions.Logging
+
+@inherits StatiqRazorPage<IDocument>
+
+@{
+    var index = 0;
+    var projectDocuments = Document.GetChildren().OrderBy(d => d.Get<int>(Keys.Order, int.MaxValue));
+}
+@foreach (var document in projectDocuments)
+{
+    @if (index != 0)
+    {
+        <hr />
+    }
+
+    index++;
+    var title = document.Get<string>(WebKeys.Title);
+    var image = document.Get<string>(WebKeys.Image);
+
+    <div class="row">
+    <div class="col-md-9 col-md-offset-3">
+        <h2>@title</h2>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-3">
+        @if (!string.IsNullOrEmpty(image))
+        {
+            <p><img src="@image" alt="@title" /></p>
+        }
+    </div>
+    <div class="col-md-9">
+        @Html.Raw(await document.GetContentStringAsync())
+    </div>
+    </div>
+}

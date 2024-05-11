@@ -1,5 +1,15 @@
 # Builds and deploys static website duracellko.net
 
+variables:
+  - name: Parameters.solution
+    value: 'Duracellko.NET.sln'
+  - name: BuildConfiguration
+    value: 'release'
+  - group: DuracellkoWebSite
+  
+  # Build pipeline variables:
+  #   AzureBlobStorageConnectionString - Connection string to Azure Blob storageto deploy the website to
+
 trigger:
 - master
 
@@ -10,26 +20,45 @@ jobs:
   displayName: Duracellko.WebSite
 
   pool:
-    vmImage: windows-2019
+    vmImage: windows-latest
   
   workspace:
     clean: all
   
   steps:
+  - task: UseDotNet@2
+    displayName: Install .NET SDK
+    inputs:
+      version: 8.0.x
+
   - task: DotNetCoreCLI@2
-    displayName: Install Wyam
+    displayName: dotnet restore
+    inputs:
+      command: restore
+      projects: $(Parameters.solution)
+  
+  - task: DotNetCoreCLI@2
+    displayName: dotnet build
+    inputs:
+      command: build
+      projects: $(Parameters.solution)
+      arguments: --configuration $(BuildConfiguration)
+  
+  - task: DotNetCoreCLI@2
+    displayName: deploy website
     inputs:
       command: custom
-      custom: tool
-      arguments: install -g Wyam.Tool
+      custom: './bin/$(BuildConfiguration)/net8.0/Duracellko.NET.dll'
+      arguments: 'deploy'
+      workingDirectory: $(Build.SourcesDirectory)/Duracellko.NET
+    env:
+      AzureStorageConnectionString: $(AzureBlobStorageConnectionString)
   
-  - script: wyam
-
   - task: ArchiveFiles@2
     displayName: ZIP output
     inputs:
       archiveType: zip
-      rootFolderOrFile: $(Build.SourcesDirectory)/output
+      rootFolderOrFile: $(Build.SourcesDirectory)/Duracellko.NET/output
       archiveFile: $(Build.StagingDirectory)/web.zip
       includeRootFolder: false
       replaceExistingArchive: true
@@ -39,14 +68,3 @@ jobs:
     inputs:
       PathtoPublish: $(Build.StagingDirectory)
       ArtifactName: web
-
-  - task: FtpUpload@2
-    displayName: Upload to duracellko.net-FTP
-    inputs:
-      serverEndpoint: 'duracellko.net-FTP'
-      rootDirectory: $(Build.SourcesDirectory)/output
-      remoteDirectory: /
-      preservePaths: true
-      clean: false
-      cleanContents: true
-      trustSSL: true
