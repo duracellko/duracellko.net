@@ -1,10 +1,10 @@
 Title: Round-lot validation (part 1)
-Published: 2024-06-25
+Published: 2024-06-27
 Tags:
 - floating-point numbers
 - numerical computing
 ---
-Recently I was implementing a validation checking that user entered number fits into a configured round-lot. For example when a round-lot is 2 then only even numbers are allowed values. Other examples would be:
+Recently I was implementing a validation checking that a number entered by user fits into a configured round-lot. For example when the round-lot is 2 then only even numbers are allowed values. Other examples would be:
 
 | Round-lot | Allowed values      | Not allowed values |
 |-----------|---------------------|--------------------|
@@ -103,7 +103,7 @@ $$
 a \geq 2^{n}b
 $$
 
-And that is the precondition. So following the implications in reverse order is proof of Lemma 1.
+And that is the precondition. So following the implications in reverse order is the proof of Lemma 1.
 
 With this small lemma in our toolset, it's possible to find out the $\epsilon$ we are looking for. At first let's summarize, what we know about the numbers.
 
@@ -125,7 +125,7 @@ $$
 
 This is because the lowest possible $r$ is the lowest possible $u$ divided by the highest possible $c$. And the same way the highest possible $r$ is the highest possible $u$ divided by the lowest possible $c$.
 
-Let's focus on the left side the the inequation.
+Let's focus on the left side of the inequation.
 
 $$
 r \geq \frac{\left( s_u - 2^{-k-1} \right) 2^{e_u}}{\left( s_c + 2^{-k-1} \right) 2^{e_c}} =
@@ -216,7 +216,7 @@ Now it seems like dividing of two floating point numbers does not loose any prec
 
 ## Rounding off
 
-$\frac{s_u}{s_c}$ is rational number. It may require more than $k$ bits to be expressed exactly. Actually, as rational number, it may require infinite number of bits to be expressed exactly. But we have only $k$ bits. And that is the point, where the precision is lost. But how much precision can be lost? Let's have a look at floating-point result of expression $\frac{u_f}{u_c}$. The result should be
+$\frac{s_u}{s_c}$ is rational number. It may require more than $k$ bits to be expressed exactly. Actually as rational number it may require infinite number of bits to be expressed exactly. But we have only $k$ bits. And that is the point, where the precision is lost. But how much precision can be lost? Let's have a look at floating-point result of expression $\frac{u_f}{u_c}$. The result should be
 
 $$
 r_f = f \left( \frac{s_u}{s_c} \right) 2^{e_u-e_c}
