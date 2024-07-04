@@ -291,7 +291,7 @@ $$
 |r_f - r| \leq 2^{e_u-e_c-k} = 2^{e_r-k}
 $$
 
-Now we know, what is the range that we have to look for our integer. In the next part I will show, how to use this knowledge to implement the validation function.
+Now we know, what is the range that we have to look for our integer. In [the next part](../07/round-lot-validation-part-2) I will show, how to use this knowledge to implement the validation function.
 
 **Note**: It is also possible that the rounding function simply truncates bits that do not fit into the significand. Then the rounding function would be something like
 
