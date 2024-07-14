@@ -302,7 +302,7 @@ The function doesn't handle some exceptional cases, for example:
 
 However, handling of these inputs depends on your application.
 
-This post presented accurate implementation of the round-lot validation. In the next post I will have a look, how does this work with [Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) data type.
+This post presented accurate implementation of the round-lot validation. In [the next post](round-lot-validation-part-3) I will have a look, how does this work with [Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) data type.
 
 **Note**: It is also possible that the rounding function simply truncates bits that do not fit into the significand. Then the rounding function would be something like
 

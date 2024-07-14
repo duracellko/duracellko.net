@@ -28,7 +28,7 @@ After running some tests it was found out that it works for some input values, e
 
 ## Floating-point numbers
 
-Mostly, when people define some formulas or calculations (e.g. $m=u/c$), they are mostly defined in space of real numbers or rational numbers. However, there is infinite number of real or rational numbers, but computers have only finite memory, so computers use floating-point numbers. So let's talk about difference between real numbers and floating-point numbers. For the rest of this post we can consider that all numbers are not negative. I think it is quite clear that it's possible to do the validation on absolute values of $u$ and $c$, so sign of the numbers is not relevant. Floating-point numbers are represented by a significand $s$ and an exponent $e$. Then the expressed number is $s2^e$. Significand is a rational number, but with limited precision. And the exponent is an integer. For example single precission floating-point numbers have significand of size 11 bits and exponent of size 4 bits. When bits of significand are $s_1, s_2, \dots s_{11}$ then the number represented by the bits is
+Mostly, when people define some formulas or calculations (e.g. $m=u/c$), they are mostly defined in space of real numbers or rational numbers. However, there is infinite number of real or rational numbers, but computers have only finite memory. Therefore, computers use floating-point numbers. So let's talk about difference between real numbers and floating-point numbers. For the rest of this post we can consider that all numbers are not negative. I think it is quite clear that it's possible to do the validation on absolute values of $u$ and $c$, so sign of the numbers is not relevant. Floating-point numbers are represented by a significand $s$ and an exponent $e$. Then the expressed number is $s2^e$. Significand is a rational number, but with limited precision. And the exponent is an integer. For example single precission floating-point numbers have significand of size 11 bits and exponent of size 4 bits. When bits of significand are $s_1, s_2, \dots s_{11}$ then the number represented by the bits is
 
 $$
 \left(1 + \sum_{i=1}^{11} s_{i}2^{-i} \right) 2^e
@@ -58,7 +58,7 @@ It's possible to see that it is very likely that the pattern $0011$ would repeat
 
 ## Implementation
 
-General practice working with floating-point numbers is to not consider them as exact numbers. Procedure implementations should consider that a floating-point number represents a nearby value. For example, binary floating-point number $1.00011001100$ may represent decimal number 1.1. Therefore comparing 2 floating-point numbers shouldn't be done exactly, but should allow a small difference. How should the implementation of the validation function be changed?
+General practice working with floating-point numbers is to not consider them as exact numbers. Procedure implementations should consider that a floating-point number represents a nearby value. For example, binary floating-point number $1.00011001100$ may represent decimal number 1.1. Therefore comparing 2 floating-point numbers shouldn't be done exactly, but should allow a small difference. What does it mean for the implementation of the validation function?
 
 At first the input values should be converted to absolute values, because the result doesn't depend on sign of the numbers.
 
