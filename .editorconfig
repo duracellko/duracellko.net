@@ -10,6 +10,7 @@ insert_final_newline = true
 [*.cs]
 dotnet_sort_system_directives_first = true
 
+dotnet_diagnostic.CA1515.severity = none
 dotnet_diagnostic.CA1724.severity = none
 dotnet_diagnostic.CA1848.severity = none
 dotnet_diagnostic.CA2007.severity = none
