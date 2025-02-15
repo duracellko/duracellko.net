@@ -48,7 +48,7 @@ jobs:
     displayName: deploy website
     inputs:
       command: custom
-      custom: './bin/$(BuildConfiguration)/net8.0/Duracellko.NET.dll'
+      custom: './bin/$(BuildConfiguration)/net9.0/Duracellko.NET.dll'
       arguments: 'deploy'
       workingDirectory: $(Build.SourcesDirectory)/Duracellko.NET
     env:
