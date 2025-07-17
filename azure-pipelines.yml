@@ -4,11 +4,11 @@ variables:
   - name: Parameters.solution
     value: 'Duracellko.NET.sln'
   - name: BuildConfiguration
-    value: 'release'
+    value: 'Release'
   - group: DuracellkoWebSite
   
   # Build pipeline variables:
-  #   AzureBlobStorageConnectionString - Connection string to Azure Blob storageto deploy the website to
+  #   AzureStaticWebAppDeploymentToken - Deployment token for Azure Static Web App
 
 trigger:
 - master
@@ -20,7 +20,7 @@ jobs:
   displayName: Duracellko.WebSite
 
   pool:
-    vmImage: windows-latest
+    vmImage: ubuntu-latest
   
   workspace:
     clean: all
@@ -49,10 +49,7 @@ jobs:
     inputs:
       command: custom
       custom: './bin/$(BuildConfiguration)/net9.0/Duracellko.NET.dll'
-      arguments: 'deploy'
       workingDirectory: $(Build.SourcesDirectory)/Duracellko.NET
-    env:
-      AzureStorageConnectionString: $(AzureBlobStorageConnectionString)
   
   - task: ArchiveFiles@2
     displayName: ZIP output
@@ -68,3 +65,15 @@ jobs:
     inputs:
       PathtoPublish: $(Build.StagingDirectory)
       ArtifactName: web
+  
+  - task: Npm@1
+    displayName: Install SWA CLI
+    inputs:
+      command: custom
+      customCommand: 'install -g @azure/static-web-apps-cli'
+  
+  - pwsh: '& swa deploy -a ./Duracellko.NET/output/ -d $env:AzureStaticWebAppDeploymentToken --env production'
+    displayName: Deploy Azure Static Web App
+    workingDirectory: $(Build.SourcesDirectory)
+    env:
+      AzureStaticWebAppDeploymentToken: $(AzureStaticWebAppDeploymentToken)
