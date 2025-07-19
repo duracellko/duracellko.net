@@ -1,0 +1,10 @@
+{
+    "responseOverrides": {
+        "404": {
+            "rewrite": "/errors/404.html"
+        }
+    },
+    "platform": {
+        "apiRuntime": "dotnet-isolated:9.0"
+    }
+}

@@ -5,8 +5,10 @@ variables:
     value: 'Duracellko.NET.sln'
   - name: BuildConfiguration
     value: 'Release'
+  - name: AzureStaticWebAppEnvironment
+    value: 'production'
   - group: DuracellkoWebSite
-  
+
   # Build pipeline variables:
   #   AzureStaticWebAppDeploymentToken - Deployment token for Azure Static Web App
 
@@ -24,7 +26,7 @@ jobs:
   
   workspace:
     clean: all
-  
+
   steps:
   - task: UseDotNet@2
     displayName: Install .NET SDK
@@ -36,44 +38,63 @@ jobs:
     inputs:
       command: restore
       projects: $(Parameters.solution)
-  
+
   - task: DotNetCoreCLI@2
     displayName: dotnet build
     inputs:
       command: build
       projects: $(Parameters.solution)
       arguments: --configuration $(BuildConfiguration)
-  
+
+  - task: DotNetCoreCLI@2
+    displayName: dotnet publish
+    inputs:
+      command: publish
+      projects: $(Parameters.solution)
+      arguments: --configuration $(BuildConfiguration)
+      publishWebProjects: false
+      zipAfterPublish: false
+
   - task: DotNetCoreCLI@2
     displayName: deploy website
     inputs:
       command: custom
-      custom: './bin/$(BuildConfiguration)/net9.0/Duracellko.NET.dll'
+      custom: './bin/$(BuildConfiguration)/net9.0/publish/Duracellko.NET.dll'
       workingDirectory: $(Build.SourcesDirectory)/Duracellko.NET
-  
+
   - task: ArchiveFiles@2
-    displayName: ZIP output
+    displayName: ZIP web
     inputs:
       archiveType: zip
       rootFolderOrFile: $(Build.SourcesDirectory)/Duracellko.NET/output
       archiveFile: $(Build.StagingDirectory)/web.zip
       includeRootFolder: false
       replaceExistingArchive: true
-  
+
+  - task: ArchiveFiles@2
+    displayName: ZIP api
+    inputs:
+      archiveType: zip
+      rootFolderOrFile: $(Build.SourcesDirectory)/Duracellko.WebSiteFunctions/bin/Release/net9.0/publish
+      archiveFile: $(Build.StagingDirectory)/api.zip
+      includeRootFolder: false
+      replaceExistingArchive: true
+
   - task: PublishBuildArtifacts@1
     displayName: Publish artifact
     inputs:
       PathtoPublish: $(Build.StagingDirectory)
       ArtifactName: web
-  
+
   - task: Npm@1
     displayName: Install SWA CLI
     inputs:
       command: custom
       customCommand: 'install -g @azure/static-web-apps-cli'
-  
-  - pwsh: '& swa deploy -a ./Duracellko.NET/output/ -d $env:AzureStaticWebAppDeploymentToken --env production'
+
+  - pwsh: '& swa deploy -a ./Duracellko.NET/output/ -i ./Duracellko.WebSiteFunctions/bin/Release/net9.0/publish --api-language dotnetisolated --api-version 9.0'
     displayName: Deploy Azure Static Web App
     workingDirectory: $(Build.SourcesDirectory)
     env:
-      AzureStaticWebAppDeploymentToken: $(AzureStaticWebAppDeploymentToken)
+      SWA_CLI_DEPLOYMENT_TOKEN: $(AzureStaticWebAppDeploymentToken)
+      SWA_CLI_DEPLOY_ENV: $(AzureStaticWebAppEnvironment)
