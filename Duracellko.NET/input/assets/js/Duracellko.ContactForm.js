@@ -4,7 +4,7 @@ var Duracellko;
     // Class to handle HTML form to sent email
     var ContactForm = (function () {
         function ContactForm(formId) {
-            this._sendEmailUrl = "https://duracellko-functions2.azurewebsites.net/api/SendEmail";
+            this._sendEmailUrl = "/api/SendEmail";
             this._formId = formId;
         }
 
