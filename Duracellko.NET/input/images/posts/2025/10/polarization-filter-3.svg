@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" viewBox="0 0 240 240" width="240" height="240" style="stroke:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-width:1;stroke-dasharray:none;fill:#000000;fill-opacity:1;fill-rule:evenodd" font-family="Arial" font-size="15px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <path id="Rectangle" d="M20,80L160,80L160,220L20,220z" style="stroke:#000000;fill:#7F7F7F;" />
+  <path id="Rectangle1" d="M51.0067,89.4289L150.5711,-8.9933L248.9933,90.571L149.4289,188.9933z" style="stroke:#000000;fill:#7F7F7F;" />
+  <path id="Shape" d="M60.48,80.334L51.2808,89.3777L149.4616,188.7591L160.0032,178.5143L159.9255,80.2563L60.48,80.334z" style="stroke:#000000;fill:#3F3F3F;" />
+  <path id="Arc" d="M138.5043,32.1117C154.4072,31.4163 169.7899,38.0069 180.2566,49.9999" style="stroke:#FFFF00;stroke-linecap:round;stroke-width:3;fill:none;" />
+  <path id="Shape1" d="M173.3666,48.5766L182.4852,53.0012L179.7505,43.6855" style="stroke:#FFFF00;stroke-linecap:round;stroke-width:3;fill:none;" />
+</svg>
