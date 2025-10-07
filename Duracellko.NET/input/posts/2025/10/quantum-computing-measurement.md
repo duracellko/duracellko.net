@@ -17,6 +17,8 @@ Now it is possible to explain the experiment with three polarization filters. As
 
 This second filter changes the polarization of 50% of the photons to the direction of $ y^\prime $ and the other 50% to $ x^\prime $, which does not pass through the filter. Now we have 50% of the light passing through the first filter and 50% of that passing through the second filter. That means 25% of the light passes through both filters, and all of this light has the polarization direction of the $ y^\prime $ axis. The third filter then measures again in the horizontal x-axis and vertical y-axis, similar to the first image. The outcome is that 50% of the photons reaching the third filter change polarization to the y-axis and 50% to the x-axis, which is again filtered out. Therefore, the total light passing through all three filters is 12.5%.
 
+![3 polarization filters measurement](/images/posts/2025/10/3-filters-measurement.svg)
+
 ## Multiple qubits
 
 With classical bits of values 0 or 1, it is possible to combine them to represent other numbers or values. For example, it is possible to combine 8 bits to represent an integer between 0 and 255. Is it possible to combine multiple qubits in the same way? The answer is "yes." But do we even need it? If a qubit can be any real number between $0$ and $2\pi$, then it can easily represent a number from a finite set of integers. For example, an integer $ i \in \{ 0, \ldots, 255 \} $ can be represented by a qubit as
