@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Duracellko.NET/Duracellko.NET.csproj" />
+  <Project Path="Duracellko.WebSiteFunctions/Duracellko.WebSiteFunctions.csproj" />
+</Solution>
